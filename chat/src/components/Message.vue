@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img :src="value.avatarUrl" alt="">
     <span style="color: white">{{ value.text }}</span>
   </div>
 </template>
