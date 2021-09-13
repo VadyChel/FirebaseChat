@@ -38,7 +38,7 @@ export default {
     const chatsQuery = query(
       chatsCollection,
       limit(25),
-      where("userId", "==", this.auth.currentUser.uid)
+      where("members", "array-contains", this.auth.currentUser.uid)
     );
     onSnapshot(chatsQuery, { includeMetadataChanges: true }, (snapshot) => {
       this.chats = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));

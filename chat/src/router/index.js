@@ -20,7 +20,20 @@ const routes = [
     component: () => import("../views/ChatPage.vue"),
     meta: {
       requiresAuth: true,
-    },
+    }
+  },
+  {
+    path: '/createInvite/:chatId',
+    name: "CreateChatInvite",
+    component: () => import("../views/CreateChatInvite.vue"),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: "/invite/:code",
+    name: "ChatInvite",
+    component: () => import("../views/ProcessChatInvite.vue")
   },
   {
     path: "/new",

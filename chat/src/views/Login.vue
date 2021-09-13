@@ -5,17 +5,22 @@
 </template>
 
 <script>
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {getAuth, setPersistence, browserLocalPersistence, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
 export default {
   name: "Login",
+  mounted() {
+    console.log('page2')
+  },
   methods: {
     signInWithGoogle() {
       const auth = getAuth();
       const provider = new GoogleAuthProvider();
-      signInWithPopup(auth, provider).then(() =>
-        this.$router.push({ path: "/" })
-      );
+      setPersistence(auth, browserLocalPersistence).then(() => {
+        signInWithPopup(auth, provider).then(() => {
+          this.$router.push({path: "/"})
+        });
+      })
     },
   },
 };

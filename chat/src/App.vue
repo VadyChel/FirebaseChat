@@ -2,6 +2,7 @@
   <div id="page">
     <router-link to="/">Home</router-link> |
     <router-link to="/login">Login</router-link>
+    <button type="button" @click="signOut">Sing Out</button>
     <router-view />
   </div>
 </template>
@@ -14,6 +15,12 @@ export default {
     auth() {
       return getAuth();
     },
+  },
+  methods: {
+    signOut () {
+      this.auth.signOut()
+      localStorage.removeItem("idToken")
+    }
   },
   mounted() {
     if (this.$route.path !== "/login" && !this.auth.currentUser) {
@@ -31,7 +38,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #fff;
   background-color: #333;
 }
 

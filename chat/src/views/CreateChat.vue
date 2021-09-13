@@ -24,7 +24,8 @@ export default {
       const db = getFirestore();
       const newChat = await addDoc(collection(db, "chats"), {
         name: this.chatName,
-        userId: this.auth.currentUser.uid,
+        authorId: this.auth.currentUser.uid,
+        members: [this.auth.currentUser.uid]
       });
       this.$router.push({ path: `/chat/${newChat.id}` });
     },

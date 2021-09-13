@@ -1,10 +1,12 @@
 <template>
   <div>
+    <router-link :to="`/createInvite/${$route.params.chatId}`">Invite</router-link>
+
     <div>
       <Message v-for="message of messages" :key="message.id" :value="message" />
     </div>
 
-    <CreateMessageForm />
+    <CreateMessageForm style="position: fixed; bottom: 0; display: flex"/>
   </div>
 </template>
 

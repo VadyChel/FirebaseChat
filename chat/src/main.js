@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import { initializeApp } from "firebase/app";
 import "@mdi/font/css/materialdesignicons.css";
+import {GoogleAuthProvider, onAuthStateChanged, signInWithCredential, getAuth, getIdTokenResult} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxiZXriKMSuvpPUaKtgoydDN0ubcFC2So",
@@ -16,4 +17,13 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-createApp(App).use(store).use(router).mount("#app");
+const auth = getAuth()
+let app;
+onAuthStateChanged(auth, async (user) => {
+  if (!app) {
+    app = createApp(App).use(store).use(router).mount("#app");
+  }
+
+  const credential = GoogleAuthProvider.credential(await getIdTokenResult(user).token);
+  await signInWithCredential(credential);
+})
