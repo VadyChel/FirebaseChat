@@ -3,8 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { initializeApp } from "firebase/app";
-import "@mdi/font/css/materialdesignicons.css";
 import {GoogleAuthProvider, onAuthStateChanged, signInWithCredential, getAuth, getIdTokenResult} from "firebase/auth";
+import "@mdi/font/css/materialdesignicons.css";
+import "./assets/main.css"
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxiZXriKMSuvpPUaKtgoydDN0ubcFC2So",

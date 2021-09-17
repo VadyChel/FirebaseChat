@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chats">
-      <Chat :value="chat" v-for="chat of chats" :key="chat.id" />
+      <ChatsListItem :value="chat" v-for="chat of chats" :key="chat.id" />
     </div>
     <router-link to="/new" class="new-chat-button"
       ><span class="mdi mdi-plus"></span
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Chat from "../components/Chat";
+import ChatsListItem from "../components/ChatsListItem";
 import { getAuth } from "firebase/auth";
 import {
   getFirestore,
@@ -26,7 +26,7 @@ export default {
   data: () => ({
     chats: [],
   }),
-  components: { Chat },
+  components: { ChatsListItem },
   computed: {
     auth() {
       return getAuth();
@@ -48,6 +48,11 @@ export default {
 </script>
 
 <style scoped>
+.chats {
+  padding: 0 2em;
+  margin-top: 4%;
+}
+
 .new-chat-button {
   position: absolute;
   bottom: 4%;

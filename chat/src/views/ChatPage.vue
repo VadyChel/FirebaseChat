@@ -1,12 +1,12 @@
 <template>
   <div>
-    <router-link :to="`/createInvite/${$route.params.chatId}`">Invite</router-link>
+    <ChatPageHeader/>
 
-    <div>
+    <div class="chat-messages">
       <Message v-for="message of messages" :key="message.id" :value="message" />
     </div>
 
-    <CreateMessageForm style="position: fixed; bottom: 0; display: flex"/>
+    <CreateMessageForm/>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ import {
   onSnapshot,
   where,
 } from "firebase/firestore";
+import ChatPageHeader from "../components/ChatPageHeader";
 import CreateMessageForm from "../components/CreateMessageForm";
 
 export default {
@@ -28,7 +29,7 @@ export default {
   data: () => ({
     messages: [],
   }),
-  components: { CreateMessageForm, Message },
+  components: { CreateMessageForm, Message, ChatPageHeader },
   async mounted() {
     const db = getFirestore();
     const messagesCollection = collection(db, "messages");
@@ -46,4 +47,24 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.chat-messages {
+  overflow-y: auto; 
+  height: 75vh;
+  padding: 0 2em;
+  margin-top: 4%;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #1e1e1e;
+  border-radius: 100px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background-color: #fff;
+}
+</style>

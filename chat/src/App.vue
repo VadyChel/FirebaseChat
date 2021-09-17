@@ -1,29 +1,22 @@
 <template>
   <div id="page">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/login">Login</router-link>
-    <button type="button" @click="signOut">Sing Out</button>
-    <router-view />
+    <Header/>
+
+    <div>
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
+import Header from "./components/Header";
 import { getAuth } from "firebase/auth";
 
 export default {
-  computed: {
-    auth() {
-      return getAuth();
-    },
-  },
-  methods: {
-    signOut () {
-      this.auth.signOut()
-      localStorage.removeItem("idToken")
-    }
-  },
+  components: { Header },
   mounted() {
-    if (this.$route.path !== "/login" && !this.auth.currentUser) {
+    const auth = getAuth()
+    if (this.$route.path !== "/login" && !auth.currentUser) {
       this.$router.push({ path: "/login" });
     }
   },
@@ -43,8 +36,9 @@ export default {
 }
 
 #page {
-  background-color: #333b66;
+  background-color: var(--blue-color);
   height: 100vh;
+  overflow: hidden;
   width: clamp(400px, 60vw, 600px);
   position: relative;
 }
