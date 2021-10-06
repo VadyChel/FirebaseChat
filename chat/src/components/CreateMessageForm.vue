@@ -28,17 +28,18 @@ export default {
   },
   methods: {
     async createMessage() {
+      const text = (' ' + this.messageText).slice(1);
+      this.messageText = ''
+
       const db = getFirestore();
       await addDoc(collection(db, "messages"), {
-        text: this.messageText,
+        text,
         createdAt: Timestamp.now(),
         avatarUrl: this.auth.currentUser.photoURL,
         type: "0",
         chatId: this.$route.params.chatId,
         authorId: this.auth.currentUser.uid,
       })
-
-      this.messageText = ''
     },
   },
 };
