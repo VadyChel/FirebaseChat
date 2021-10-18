@@ -21,6 +21,7 @@ export default {
   methods: {
     signOut () {
       this.auth.signOut()
+      this.$router.replace('/login')
     }
   }
 };

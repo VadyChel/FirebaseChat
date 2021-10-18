@@ -8,7 +8,7 @@
           'message-text-block-received': !isMessageSent,
           'message-text-block-sent': isMessageSent
         }"
-        @click="settingsIsOpened = !settingsIsOpened"
+        @click="openCloseDropdown"
         ref="messageBlock"
       >
         <div v-if="!editingMode">
@@ -19,8 +19,8 @@
             <span class="message-dropdown-setting" v-for="setting of messageSettings" @click="setting.func">{{ setting.title }}</span>
           </div>
         </div>
-        
-        <div v-else>
+
+        <div v-if="editingMode">
           <input type="text" v-model='newText'>
           <button class="edit-message-button" type="button" @click="editingMode = false">Cancel</button>
           <button class="edit-message-button" type="button" @click="editMessage">Save</button>
@@ -50,10 +50,20 @@ export default {
   },
   computed: {
     isMessageSent () {
-      return this.value.authorId === getAuth().currentUser.uid
+      return this.value.authorId === this.auth.currentUser.uid
+    },
+    auth () {
+      return getAuth()
     }
   },
   methods: {
+    openCloseDropdown () {
+      if (this.value.authorId !== this.auth.currentUser.uid) {
+        return
+      }
+
+      this.settingsIsOpened = !this.settingsIsOpened
+    },
     async editMessage () {
       const db = getFirestore()
       await updateDoc(doc(db, 'messages', this.value.id), { text: this.newText })
@@ -118,12 +128,14 @@ export default {
 }
 
 .message-text-block {
-  height: 48px;
+  min-height: 48px;
   padding: 0 20px;
   border-radius: 25px;
   display: flex;
   align-items: center;
   position: relative;
+  max-width: 200px;
+  word-break: break-word;
 }
 
 .message-text-block-received {

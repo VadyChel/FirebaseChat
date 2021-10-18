@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button type="button" @click="signInWithGoogle">Sign in With Google</button>
+  <div style="margin: 50% 0; display: flex; justify-content: center">
+    <button class="login-button" type="button" @click="signInWithGoogle">Sign in With Google</button>
   </div>
 </template>
 
@@ -9,9 +9,6 @@ import {getAuth, setPersistence, browserLocalPersistence, GoogleAuthProvider, si
 
 export default {
   name: "Login",
-  mounted() {
-    console.log('page2')
-  },
   methods: {
     signInWithGoogle() {
       const auth = getAuth();
@@ -26,4 +23,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.login-button {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--dark-blue-color);
+  color: #ffffff;
+}
+</style>
