@@ -3,3 +3,7 @@
     --blue-color: #333b66;
     --light-color: #fff;
 }
+
+.spacer {
+    flex-grow: 1;
+}
