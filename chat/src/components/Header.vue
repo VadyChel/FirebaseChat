@@ -36,7 +36,7 @@ export default {
 .header-buttons {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .header-button {

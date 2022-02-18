@@ -24,7 +24,7 @@ export default {
 .chat-header-buttons {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .chat-header-button {

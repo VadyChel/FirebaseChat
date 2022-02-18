@@ -102,7 +102,7 @@ export default {
 
 .message-dropdown-setting {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 10px;
   cursor: pointer;
 }
