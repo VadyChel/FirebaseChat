@@ -2,8 +2,22 @@
     --dark-blue-color: #1f243d;
     --blue-color: #333b66;
     --light-color: #fff;
+    --border-radius: 5px;
 }
 
 .spacer {
     flex-grow: 1;
+}
+
+.button {
+    padding: 10px;
+    border-radius: var(--border-radius);
+    background-color: var(--blue-color);
+    color: #ffffff;
+    border: none;
+    font-size: 0.7em;
+}
+
+.button:hover {
+    background-color: var(--dark-blue-color);
 }

@@ -75,10 +75,11 @@ export default {
       await deleteDoc(doc(db, 'messages', this.value.id))
     },
     getCreatedAt (createdAt) {
-      const date = new Date(createdAt)
-      const dateHours = date.getHours()
-      const dateMinutes = date.getMinutes()
-      return (dateHours < 10 ? '0'+dateHours : dateHours) + ':' + (dateMinutes < 10 ? '0'+dateMinutes : dateMinutes)
+      return new Date(createdAt).toLocaleTimeString('en-GB', {
+        timeZone: 'UTC',
+        minute: 'numeric',
+        hour: 'numeric'
+      })
     }
   }
 };

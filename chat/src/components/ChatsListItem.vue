@@ -1,21 +1,20 @@
 <template>
-  <div>
-    <div class="chat-container">
-      <div v-if="!editingMode">
-        <router-link :to="`/chat/${value.id}`" class="chat-name" >{{ value.name }}</router-link>
-      </div>
+  <div class="chat-container">
+    <div v-if="!editingMode">
+      <router-link :to="`/chat/${value.id}`" class="chat-name" >{{ value.name }}</router-link>
+    </div>
 
-      <div v-else>
-        <input type="text" v-model='newText'>
-        <button class="edit-message-button" type="button" @click="editingMode = false">Cancel</button>
-        <button class="edit-message-button" type="button" @click="editChat">Save</button>
-      </div>
-      <span class="spacer"></span>
+    <div v-else class="editing-mode">
+      <input type="text" class="editing-input" v-model='newText'/>
 
-      <div v-if="auth.currentUser.uid === value.authorId">
-        <span @click="editingMode = true" class="chat-icon chat-icon-edit mdi mdi-pencil"></span>
-        <span @click="deleteChat" class="chat-icon chat-icon-delete mdi mdi-delete"></span>
-      </div>
+      <button class="button cancel-editing-button" type="button" @click="editingMode = false">Cancel</button>
+      <button class="button" type="button" @click="editChat">Save</button>
+    </div>
+    <span class="spacer"></span>
+
+    <div v-if="auth.currentUser.uid === value.authorId">
+      <span @click="editingMode = true" class="chat-icon chat-icon-edit mdi mdi-pencil"></span>
+      <span @click="deleteChat" class="chat-icon chat-icon-delete mdi mdi-delete"></span>
     </div>
   </div>
 </template>
@@ -96,5 +95,35 @@ export default {
 
 .chat-container:hover .chat-name {
   color: var(--dark-blue-color);
+}
+
+.cancel-editing-button {
+  margin-right: 6px;
+}
+
+.editing-mode {
+  display: flex;
+  align-items: center;
+}
+
+.editing-input {
+  margin-right: 10px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--blue-color);
+  padding: 5px 10px;
+  min-width: 275px;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.editing-input:focus {
+  background-color: #23274a;
+}
+
+.editing-input:focus-visible{
+  outline: none;
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <form @keydown.prevent.enter="createMessage" class="create-message-form">
       <input ref="createMessageInput" type="text" v-model="messageText" class="create-message-input" placeholder="Enter text"/>
-<!--      <button type="button" @click.prevent="createMessage" class="create-message-button"><span style="transform: rotate(-45deg);" class="mdi mdi-send"></span></button>-->
+      <button type="button" @click.prevent="createMessage" class="create-message-button"><span style="transform: rotate(-45deg);" class="mdi mdi-send"></span></button>
     </form>
   </div>
 </template>
@@ -55,7 +55,8 @@ export default {
 }
 
 .create-message-input {
-  width: 100%;
+  flex: 1 1 auto;
+  margin-right: 10px;
   border-radius: 15px;
   border: none;
   padding: 10px 20px;
@@ -73,10 +74,25 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.2s;
+}
+
+.create-message-button:focus{
+  border: 4px solid #23274a;
 }
 
 .create-message-button span {
   transform: rotate(-45deg);
   transform-origin: 45% 45%;
+  color: var(--dark-blue-color);
+  transition: 0.2s;
+}
+
+.create-message-button:hover {
+  background-color: var(--dark-blue-color);
+}
+
+.create-message-button:hover > span{
+  color: var(--light-color);
 }
 </style>
