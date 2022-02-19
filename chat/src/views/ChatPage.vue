@@ -2,8 +2,8 @@
   <div>
     <ChatPageHeader/>
 
-    <div class="chat-messages">
-      <Message v-for="message of messages" :key="message.id" :value="message" />
+    <div class="chat-messages" ref="messages">
+      <Message :ref="message.id" v-for="message of messages" :key="message.id" :value="message" />
     </div>
 
     <CreateMessageForm/>
@@ -42,6 +42,10 @@ export default {
 
     onSnapshot(messagesQuery, { includeMetadataChanges: true }, (docs) => {
       this.messages = docs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const lastMessageRef = this.$refs[this.messages[this.messages.length - 1].id]
+      if (lastMessageRef) {
+        lastMessageRef.$el.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   },
 };

@@ -7,8 +7,10 @@
     <div v-else class="editing-mode">
       <input type="text" class="editing-input" v-model='newText'/>
 
-      <button class="button cancel-editing-button" type="button" @click="editingMode = false">Cancel</button>
-      <button class="button" type="button" @click="editChat">Save</button>
+      <div class="editing-buttons">
+        <button class="button cancel-editing-button" type="button" @click="editingMode = false">Cancel</button>
+        <button class="button" type="button" @click="editChat">Save</button>
+      </div>
     </div>
     <span class="spacer"></span>
 
@@ -103,7 +105,13 @@ export default {
 
 .editing-mode {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.editing-buttons {
+  display: flex;
+  margin-top: 10px;
 }
 
 .editing-input {
@@ -112,7 +120,6 @@ export default {
   border: none;
   background-color: var(--blue-color);
   padding: 5px 10px;
-  min-width: 275px;
   font-size: 1.4rem;
   color: #fff;
   font-weight: bold;
