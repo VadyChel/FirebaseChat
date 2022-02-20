@@ -20,10 +20,13 @@
           </div>
         </div>
 
-        <div v-if="editingMode">
-          <input type="text" v-model='newText'>
-          <button class="edit-message-button" type="button" @click="editingMode = false">Cancel</button>
-          <button class="edit-message-button" type="button" @click="editMessage">Save</button>
+        <div v-if="editingMode" class="editing-mode">
+          <input type="text" class="editing-input" v-model='newText'/>
+
+          <div class="editing-buttons">
+            <button class="button cancel-editing-button" type="button" @click="editingMode = false">Cancel</button>
+            <button class="button save-editing-button" type="button" @click="editMessage">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -86,11 +89,6 @@ export default {
 </script>
 
 <style scoped>
-.edit-message-button {
-  border: none;
-  margin-left: 0;
-}
-
 .message-dropdown {
   background-color: var(--dark-blue-color);
   position: absolute;
@@ -99,6 +97,7 @@ export default {
   display: flex;
   width: 100px;
   flex-direction: column;
+  border-radius: var(--border-radius);
 }
 
 .message-dropdown-setting {
@@ -106,6 +105,7 @@ export default {
   justify-content: flex-start;
   padding: 10px;
   cursor: pointer;
+  border-radius: var(--border-radius);
 }
 
 .message-dropdown-setting:hover{
@@ -135,7 +135,7 @@ export default {
   display: flex;
   align-items: center;
   position: relative;
-  max-width: 200px;
+  max-width: 250px;
   word-break: break-word;
 }
 
@@ -159,5 +159,44 @@ export default {
   font-weight: bold;
   font-size: 0.75em;
   color: #c9c9c9;
+}
+
+.cancel-editing-button {
+  margin-right: 6px;
+  font-size: 1em;
+}
+
+.save-editing-button {
+  font-size: 1em;
+}
+
+.editing-mode {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.editing-buttons {
+  display: flex;
+  margin-top: 10px;
+}
+
+.editing-input {
+  margin-right: 10px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--blue-color);
+  padding: 5px 10px;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.editing-input:focus {
+  background-color: #23274a;
+}
+
+.editing-input:focus-visible{
+  outline: none;
 }
 </style>

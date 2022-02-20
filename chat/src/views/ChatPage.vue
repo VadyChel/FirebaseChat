@@ -25,7 +25,7 @@ import ChatPageHeader from "../components/ChatPageHeader";
 import CreateMessageForm from "../components/CreateMessageForm";
 
 export default {
-  name: "Login",
+  name: "ChatPage",
   data: () => ({
     messages: [],
   }),

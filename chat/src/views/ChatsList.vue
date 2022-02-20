@@ -3,9 +3,9 @@
     <div class="chats">
       <ChatsListItem :value="chat" v-for="chat of chats" :key="chat.id" />
     </div>
-    <router-link to="/new" class="new-chat-button"
-      ><span class="mdi mdi-plus"></span
-    ></router-link>
+    <router-link to="/new" class="new-chat-button">
+      <span class="mdi mdi-plus"></span>
+    </router-link>
   </div>
 </template>
 
