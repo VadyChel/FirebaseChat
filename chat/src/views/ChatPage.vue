@@ -2,9 +2,9 @@
   <div>
     <ChatPageHeader/>
 
-    <div class="chat-messages" ref="messages">
+    <div class="chat-messages" ref="messages" id="messages">
       <div v-for="message of messages" :key="message.id">
-        <Message :ref="message.id"  :value="message" />
+        <Message :ref="message.id" :id="message.id"  :value="message" />
 
         <div v-if="checkIfMessageLastOfDay(message)" style="position:relative;">
           <hr  class="message-divider"/>
@@ -15,7 +15,7 @@
 
     <CreateMessageForm/>
 
-    <button type="button" class="go-to-down">
+    <button type="button" :class="{'go-to-down': true, 'hidden': hideGoDownBtn}" @click="goToDown">
       <span class="mdi mdi-arrow-down"></span>
     </button>
   </div>
@@ -39,6 +39,7 @@ export default {
   name: "ChatPage",
   data: () => ({
     messages: [],
+    hideGoDownBtn: false
   }),
   components: { CreateMessageForm, Message, ChatPageHeader },
   async mounted() {
@@ -61,7 +62,11 @@ export default {
   },
   methods: {
     goToDown () {
-
+      this.hideGoDownBtn = true
+      document.getElementById(this.messages[this.messages.length - 1].id).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
     },
     getTimeOnDivider (time) {
       time.setDate(time.getDate()+1)
@@ -79,16 +84,15 @@ export default {
       }
       return nextMessage.createdAt.toDate().getDate() > message.createdAt.toDate().getDate()
     }
-  },
-  computed: {
-    showGoToDownButton () {
-
-    }
   }
 };
 </script>
 
 <style scoped>
+.hidden {
+  display: none !important;
+}
+
 .chat-messages {
   overflow-y: auto; 
   height: 75vh;
