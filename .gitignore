@@ -1,6 +1,6 @@
 .DS_Store
 chat/node_modules
-/dist
+chat/dist
 
 
 # local env files
